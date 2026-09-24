@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Restoran Lengkara Merapi</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #fbf7f1;
+            color: #3e2723;
+            line-height: 1.6;
+        }
+            /* HEADER */
+        header {
+            background: linear-gradient(135deg, #4b261a, #92502e);
+            color: white;
+            padding: 18px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .brand {
+            font-weight: bold;
+            font-size: 20px;
+        }
+        .brand small {
+            display: block;
+            font-size: 11px;
+            letter-spacing: 2px;
+            font-weight: normal;
+            color: #ead7c7;
+        }
+            /* NAVIGASI HTML */
+        nav {
+            display: flex;
+            gap: 7px;
+            flex-wrap: wrap;
+        }
+        nav a {
+            text-decoration: none;
+            color: white;
+            padding: 10px 14px;
+            border-radius: 22px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            background: white;
+            color: #6e3823;
+        }
+            /* HERO */
+        .hero {
+            padding: 75px 8%;
+            background:
+            linear-gradient(90deg, #2d170edb, #2d170e55),
+            url("Nasi Goreng.jpg") center/cover;
+            color: white;
+            min-height: 350px;
+            display: flex;
+            align-items: center;
+        }
+        .hero h1 {
+            font-size: clamp(32px, 5vw, 54px);
+            line-height: 1.15;
+            margin: 0;
+        }
+        .hero p {
+            max-width: 650px;
+        }
+        main {
+            width: 90%;
+            max-width: 1100px;
+            margin: 42px auto 65px;
+        }
+            /* JUDUL */
+        .title {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+            .title h1,
+        .title h2 {
+            color: #6b3823;
+            margin-bottom: 5px;
+        }
+            /* PANEL */
+            .panel,
+        .info {
+            background: white;
+            border-radius: 18px;
+            padding: 28px;
+            box-shadow: 0 5px 22px #3e27230c;
+            margin: 20px 0;
+        }
+            /* TOMBOL */
+        .btn {
+            display: inline-block;
+            background: #a85d35;
+            color: white;
+            text-decoration: none;
+            padding: 11px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            margin: 5px;
+        }
+        .btn:hover {
+            background: #6b3823;
+        }
+            /* MENU */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 5px 18px #3e272315;
+        }
+        .card img {
+            width: 100%;
+            height: 185px;
+            object-fit: cover;
+            display: block;
+        }
+        .pad {
+            padding: 17px;
+        }
+        .card h3 {
+            margin: 0 0 5px;
+            color: #6b3823;
+        }
+        .card p {
+            margin: 0;
+            color: #76665c;
+            font-size: 14px;
+        }
+        .price {
+            font-weight: bold;
+            color: #a0522d !important;
+            margin-top: 12px !important;
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+        }
+            /* VIDEO */
+        .video {
+            max-width: 650px;
+            margin: 25px auto;
+            background: white;
+            padding: 10px;
+            border-radius: 16px;
+        }
+        video {
+            width: 100%;
+            height: 330px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+            /* INFORMASI */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+            /* AREA PANDUAN DAN KATEGORI MENU */
+        .menu-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 16px;
+            align-items: stretch;
+        }
+        .kategori-menu {
+            padding: 14px 18px;
+            margin: 12px 0 22px;
+            border-radius: 12px;
+        }
+        .kategori-menu h2 {
+            font-size: 19px;
+            margin: 0 0 8px;
+        }
+        .kategori-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .kategori-links a {
+            display: block;
+            padding: 8px 12px;
+            border-radius: 8px;
+            background: #fbf7f1;
+            color: #6b3823;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 13px;
+        }
+            .kategori-links a:hover { background: #ead7c7; }
+            /* PANDUAN PEMESANAN RINGKAS */
+        .panduan-pemesanan {
+            padding: 14px 18px;
+            margin: 12px 0 22px;
+            border-radius: 12px;
+        }
+        .panduan-pemesanan h2 {
+            font-size: 19px;
+            margin: 0 0 8px;
+        }
+        .panduan-pemesanan .info-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 10px;
+        }
+        .panduan-pemesanan .info {
+            padding: 10px 12px;
+            margin: 0;
+            border-radius: 9px;
+            box-shadow: none;
+            background: #fbf7f1;
+        }
+        .panduan-pemesanan .info h3 {
+            font-size: 13px;
+            margin: 0 0 4px;
+        }
+        .panduan-pemesanan .info p {
+            font-size: 12px;
+            line-height: 1.4;
+            margin: 0;
+        }
+        .panduan-pemesanan .btn {
+            padding: 7px 13px;
+            font-size: 12px;
+            margin: 8px 0 0;
+        }
+            /* FOOTER */
+        footer {
+            background: #3e2723;
+            color: #eee;
+            text-align: center;
+            padding: 24px;
+            font-size: 13px;
+        }
+            /* RESPONSIVE */
+        @media (max-width: 760px) {
+        header {
+            justify-content: center;
+            text-align: center;
+        }
+        .grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .info-grid {
+            grid-template-columns: 1fr;
+        }
+        .panduan-pemesanan .info-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+            .menu-top { grid-template-columns: 1fr; }
+        .hero {
+            padding: 50px 7%;
+        }
+        video {
+            height: 240px;
+        }
+        }
+        @media (max-width: 520px) {
+        .grid {
+            grid-template-columns: 1fr;
+        }
+        nav {
+            justify-content: center;
+        }
+        nav a {
+            padding: 8px 10px;
+        }
+        .card img {
+            height: 210px;
+        }
+        }
+            .usd-price { font-size: 0.85em; opacity: 0.85; white-space: nowrap; }
+    </style>
+    </head>
+    <body>
+        <!-- HEADER DAN NAVIGASI -->
+        <header>
+            <div class="brand">
+                LENGKARA MERAPI
+                <small>RESTORAN • YOGYAKARTA</small>
+            </div>
+            <nav>
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#lokasi">Location</a>
+                <a href="#kontak">Contact</a>
+                <a href="#menu">Menu</a>
+            </nav>
+        </header>
+        <!-- HOME -->
+        <section id="home">
+            <div class="hero">
+                <div>
+                    <h1>
+                        Selamat Datang di<br>
+                        Restoran Lengkara Merapi
+                    </h1>
+                    <p>
+                        Nikmati cita rasa khas yang menggugah selera,
+                        dibuat dengan bahan pilihan dan disajikan
+                        dengan sepenuh hati.
+                    </p>
+                    <a href="#menu" class="btn">
+                        Jelajahi Menu
+                    </a>
+                </div>
+            </div>
+            <main>
+                <div class="title">
+                    <h2>Rasa yang Selalu Dirindukan</h2>
+                    <p>
+                        Tempat yang nyaman untuk menikmati hidangan
+                        bersama orang tersayang.
+                    </p>
+                </div>
+                <div class="panel">
+                    <h3>Suasana & Pilihan Kami</h3>
+                    <p>
+                        Intip video menu Restoran Lengkara Merapi.
+                    </p>
+                    <div class="video">
+                        <video controls>
+                            <source src="video-restoran.mp4" type="video/mp4">
+                            Browser Anda tidak mendukung video.
+                        </video>
+                    </div>
+                </div>
+            </main>
+        </section>
+        <!-- ABOUT -->
+        <section id="about">
+            <main>
+                <div class="title">
+                    <h1>About Restoran</h1>
+                    <p>Cerita di balik Restoran Lengkara Merapi</p>
+                </div>
+                <div class="panel">
+                    <h2>Selamat Datang di Lengkara Merapi</h2>
+                    <p>
+                        Restoran Lengkara Merapi hadir untuk menyajikan
+                        makanan dan minuman lezat dengan cita rasa khas.
+                        Kami mengutamakan bahan pilihan, rasa berkualitas,
+                        dan suasana nyaman agar setiap kunjungan menjadi
+                        pengalaman menyenangkan.
+                    </p>
+                    <p>
+                        Mulai dari hidangan utama hingga minuman segar,
+                        setiap menu disiapkan untuk menemani momen makan
+                        bersama keluarga, teman, maupun orang tersayang.
+                    </p>
+                    <a href="#menu" class="btn">
+                        Lihat Pilihan Menu
+                    </a>
+                </div>
+            </main>
+        </section>
+        <!-- LOCATION -->
+        <section id="lokasi">
+            <main>
+                <div class="title">
+                    <h1>Location</h1>
+                    <p>Kunjungi kami di Yogyakarta</p>
+                </div>
+                <div class="panel">
+                    <h2>Restoran Lengkara Merapi</h2>
+                    <p>
+                        Jl. Merapi No. 25, Yogyakarta, Indonesia
+                    </p>
+                    <a
+                        class="btn"
+                        href="https://www.google.com/maps/search/?api=1&query=Restoran+Lengkara+Merapi+Yogyakarta"
+                        target="_blank"
+                        rel="noopener">
+                        Buka Google Maps
+                    </a>
+                </div>
+            </main>
+        </section>
+        <!-- CONTACT -->
+        <section id="kontak">
+            <main>
+                <div class="title">
+                    <h1>Contact</h1>
+                    <p>Kami siap membantu pertanyaan Anda</p>
+                </div>
+                <div class="info-grid">
+                    <div class="info">
+                        <h3>Informasi Restoran</h3>
+                        <p>Restoran Lengkara Merapi</p>
+                        <p>
+                            Jl. Merapi No. 25, Yogyakarta
+                        </p>
+                    </div>
+                    <div class="info">
+                        <h3>Hubungi Kami</h3>
+                        <p>
+                            Kirim pertanyaan atau informasi pemesanan
+                            melalui email.
+                        </p>
+                        <a
+                            class="btn"
+                            href="mailto:info@lengkaramerapi.com?subject=Pertanyaan%20Restoran">
+                            Kirim Email
+                        </a>
+                    </div>
+                </div>
+            </main>
+        </section>
+        <!-- MENU -->
+        <section id="menu">
+            <main>
+                <div class="title">
+                    <h1>Pilihan Menu</h1>
+                    <p>Pilih makanan dan minuman favorit Anda</p>
+                </div>
+                <div class="menu-top">
+                    <!-- PANDUAN CARA MEMESAN -->
+                    <div class="panel panduan-pemesanan">
+                        <h2>Panduan Cara Memesan</h2>
+                        <div class="info-grid">
+                            <div class="info">
+                                <h3>1. Pilih Menu</h3>
+                                <p>Pilih makanan dan minuman favorit Anda dari daftar menu yang tersedia.</p>
+                            </div>
+                            <div class="info">
+                                <h3>2. Catat Pesanan</h3>
+                                <p>Catat nama menu, jumlah pesanan, dan pilihan tambahan jika ada.</p>
+                            </div>
+                            <div class="info">
+                                <h3>3. Hubungi Restoran</h3>
+                                <p>Hubungi kami melalui email untuk menyampaikan pesanan Anda.</p>
+                            </div>
+                            <div class="info">
+                                <h3>4. Konfirmasi Pesanan</h3>
+                                <p>Tunggu balasan dari pihak restoran untuk konfirmasi pesanan dan informasi selanjutnya.</p>
+                            </div>
+                        </div>
+                        <a href="#kontak" class="btn">Hubungi Restoran</a>
+                    </div>
+                    <!-- KATEGORI MENU -->
+                    <div class="panel kategori-menu">
+                        <h2>Kategori Menu</h2>
+                        <div class="kategori-links">
+                            <a href="#makanan">🍽️ Makanan</a>
+                            <a href="#minuman">🥤 Minuman</a>
+                            <a href="#daftar-menu">Lihat Semua Menu ↓</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid" id="daftar-menu">
+                    <!-- MENU 1 -->
+                    <article class="card" id="makanan">
+                        <img src="Nasi Goreng.jpg" alt="Nasi Goreng Seafood">
+                        <div class="pad">
+                            <h3>Nasi Goreng Seafood</h3>
+                            <p>
+                                Nasi goreng dengan campuran seafood
+                                yang lezat dan gurih.
+                            </p>
+                            <p class="price">Rp25.000 <span class="usd-price">(≈ $1.40)</span></p>
+                        </div>
+                    </article>
+                    <!-- MENU 2 -->
+                    <article class="card">
+                        <img src="Ayam Bakar.jpg" alt="Ayam Bakar">
+                        <div class="pad">
+                            <h3>Ayam Bakar</h3>
+                            <p>
+                                Ayam bakar dengan bumbu khas
+                                yang menggugah selera.
+                            </p>
+                            <p class="price">Rp30.000 <span class="usd-price">(≈ $1.68)</span></p>
+                        </div>
+                    </article>
+                    <!-- MENU 3 -->
+                    <article class="card">
+                        <img src="Sate Ayam.jpg" alt="Sate Ayam">
+                        <div class="pad">
+                            <h3>Sate Ayam</h3>
+                            <p>
+                                Sate ayam empuk dengan bumbu
+                                kacang khas.
+                            </p>
+                            <p class="price">Rp25.000 <span class="usd-price">(≈ $1.40)</span></p>
+                        </div>
+                    </article>
+                    <!-- MENU 4 -->
+                    <article class="card">
+                        <img src="Mie Goreng.jpg" alt="Mie Goreng">
+                        <div class="pad">
+                            <h3>Mie Goreng</h3>
+                            <p>
+                                Mie goreng gurih dengan
+                                bumbu pilihan.
+                            </p>
+                            <p class="price">Rp20.000 <span class="usd-price">(≈ $1.12)</span></p>
+                        </div>
+                    </article>
+                    <!-- MENU 5 -->
+                    <article class="card" id="minuman">
+                        <img src="Es Teh Manis.jpg" alt="Es Teh Manis">
+                        <div class="pad">
+                            <h3>Es Teh Manis</h3>
+                            <p>
+                                Minuman teh segar dengan
+                                rasa manis yang pas.
+                            </p>
+                            <p class="price">Rp8.000 <span class="usd-price">(≈ $0.45)</span></p>
+                        </div>
+                    </article>
+                    <!-- MENU 6 -->
+                    <article class="card">
+                        <img src="Es jeruk.jpg" alt="Es Jeruk">
+                        <div class="pad">
+                            <h3>Es Jeruk</h3>
+                            <p>
+                                Minuman jeruk segar untuk
+                                menemani hidangan.
+                            </p>
+                            <p class="price">Rp10.000 <span class="usd-price">(≈ $0.56)</span></p>
+                        </div>
+                    </article>
+                </div>
+            </main>
+        </section>
+        <!-- FOOTER -->
+        <footer>
+            <strong>Restoran Lengkara Merapi</strong>
+            <p>
+                Jl. Merapi No. 25, Yogyakarta, Indonesia
+            </p>
+            <p>
+                © 2026 Restoran Lengkara Merapi
+            </p>
+        </footer>
+    </body>
+</html>
