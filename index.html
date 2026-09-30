@@ -236,7 +236,18 @@
             font-size: 12px;
             margin: 8px 0 0;
         }
-            /* FOOTER */
+            /* TABEL PROMOSI */
+        .promo-table{width:100%;border-collapse:separate;border-spacing:14px;margin-top:20px}
+        .promo-table td{width:33.33%;background:#fbf7f1;border-radius:12px;padding:18px;text-align:center;vertical-align:top}
+        .promo-table h3{margin:0 0 6px;color:#6b3823;font-size:16px}
+        .promo-table p{margin:0;color:#76665c;font-size:13px;line-height:1.5}
+        .promo-highlight{background:#6b3823!important}
+        .promo-highlight h3,.promo-highlight p{color:white}
+        .menu-info-table{width:100%;border-collapse:collapse;margin:18px 0 24px;background:white;border-radius:12px;overflow:hidden}
+        .menu-info-table td{padding:12px 15px;border-bottom:1px solid #eee;font-size:13px}
+        .menu-info-table tr:last-child td{border-bottom:none}
+        .menu-info-table td:first-child{width:25%;font-weight:bold;color:#6b3823}
+        /* FOOTER */
         footer {
             background: #3e2723;
             color: #eee;
@@ -327,15 +338,20 @@
                 </div>
                 <div class="panel">
                     <h3>Suasana & Pilihan Kami</h3>
-                    <p>
-                        Intip video menu Restoran Lengkara Merapi.
-                    </p>
+        
                     <div class="video">
                         <video controls>
                             <source src="video-restoran.mp4" type="video/mp4">
                             Browser Anda tidak mendukung video.
                         </video>
                     </div>
+                    <table class="promo-table">
+                        <tr>
+                            <td><h3> Menu Pilihan</h3><p>Nasi Goreng Seafood, Ayam Bakar, Sate Ayam, dan Mie Goreng dengan cita rasa khas.</p></td>
+                            <td class="promo-highlight"><h3> Promo Spesial</h3><p>Nikmati hidangan favorit dengan harga bersahabat. Cocok untuk makan bersama keluarga dan teman.</p></td>
+                            <td><h3> Minuman Segar</h3><p>Lengkapi hidangan dengan Es Teh Manis atau Es Jeruk yang menyegarkan.</p></td>
+                        </tr>
+                    </table>
                 </div>
             </main>
         </section>
@@ -425,6 +441,11 @@
                     <h1>Pilihan Menu</h1>
                     <p>Pilih makanan dan minuman favorit Anda</p>
                 </div>
+                <table class="menu-info-table">
+                    <tr><td> Makanan</td><td>Berbagai pilihan makanan khas seperti Nasi Goreng Seafood, Ayam Bakar, Sate Ayam, dan Mie Goreng.</td></tr>
+                    <tr><td> Minuman</td><td>Minuman segar Es Teh Manis dan Es Jeruk untuk menemani hidangan Anda.</td></tr>
+                    <tr><td> Promo</td><td>Temukan menu favorit dengan harga terjangkau dan suasana restoran yang nyaman.</td></tr>
+                </table>
                 <div class="menu-top">
                     <!-- PANDUAN CARA MEMESAN -->
                     <div class="panel panduan-pemesanan">
@@ -453,8 +474,8 @@
                     <div class="panel kategori-menu">
                         <h2>Kategori Menu</h2>
                         <div class="kategori-links">
-                            <a href="#makanan">🍽️ Makanan</a>
-                            <a href="#minuman">🥤 Minuman</a>
+                            <a href="#makanan"> Makanan</a>
+                            <a href="#minuman"> Minuman</a>
                             <a href="#daftar-menu">Lihat Semua Menu ↓</a>
                         </div>
                     </div>
@@ -522,7 +543,7 @@
                     </article>
                     <!-- MENU 6 -->
                     <article class="card">
-                        <img src="Es Jeruk.jpg" alt="Es Jeruk">
+                        <img src="Es jeruk.jpg" alt="Es Jeruk">
                         <div class="pad">
                             <h3>Es Jeruk</h3>
                             <p>
