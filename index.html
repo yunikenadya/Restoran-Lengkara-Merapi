@@ -293,6 +293,39 @@
         }
         }
             .usd-price { font-size: 0.85em; opacity: 0.85; white-space: nowrap; }
+
+        /* FORM PEMESANAN */
+        .order-form fieldset { border: 1px solid #ead7c7; border-radius: 14px; padding: 18px 20px; margin: 0 0 22px; }
+        .order-form legend { padding: 0 10px; font-weight: bold; color: #6b3823; }
+        .field { display: flex; flex-direction: column; gap: 5px; margin-bottom: 14px; }
+        .field label { font-weight: bold; font-size: 14px; }
+        .order-form input[type="text"], .order-form input[type="tel"], .order-form input[type="date"], .order-form input[type="number"] {
+            padding: 10px 12px; border: 1px solid #d9c4b3; border-radius: 9px; font-size: 14px; font-family: inherit; background: #fffdfa; color: #3e2723;
+        }
+        .order-form input:focus { outline: 2px solid #a85d35; border-color: #a85d35; }
+        .form-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .menu-cat { font-weight: bold; color: #a85d35; margin: 14px 0 8px; font-size: 14px; letter-spacing: 1px; text-transform: uppercase; }
+        .menu-cat:first-of-type { margin-top: 0; }
+        .item-row { display: grid; grid-template-columns: 1fr auto 90px; gap: 12px; align-items: center; padding: 9px 12px; background: #fbf7f1; border-radius: 9px; margin-bottom: 8px; }
+        .item-row label { display: flex; align-items: center; gap: 9px; cursor: pointer; font-size: 14px; }
+        .item-row .harga { font-size: 13px; color: #76665c; white-space: nowrap; }
+        .item-row input[type="number"] { width: 100%; padding: 7px 8px; }
+        .item-row input[type="number"]:disabled { background: #eee; cursor: not-allowed; }
+        .pay-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+        .pay-option { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid #d9c4b3; border-radius: 10px; cursor: pointer; background: #fffdfa; }
+        .pay-option:hover { border-color: #a85d35; }
+        .pay-option:has(input:checked) { border-color: #a85d35; background: #fbf0e6; box-shadow: 0 0 0 2px #a85d3533; }
+        .sr { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); }
+        .pay-option svg { height: 28px; width: auto; display: block; }
+        .pay-group-title { font-size: 13px; font-weight: bold; color: #76665c; margin: 6px 0 8px; }
+        #kartuBox { display: none; margin-top: 16px; }
+        .total-box { display: flex; justify-content: space-between; align-items: center; background: #6b3823; color: white; padding: 14px 20px; border-radius: 12px; margin-bottom: 18px; font-weight: bold; }
+        .order-form button[type="submit"] { background: #a85d35; color: white; border: 0; padding: 13px 30px; border-radius: 25px; font-weight: bold; font-size: 15px; cursor: pointer; }
+        .order-form button[type="submit"]:hover { background: #6b3823; }
+        #hasilPesanan { display: none; margin-top: 22px; background: #eef7ee; border: 1px solid #b7d8b7; border-radius: 12px; padding: 16px 20px; }
+        #hasilPesanan h3 { margin-top: 0; color: #2e6b34; }
+        @media (max-width: 760px) { .form-row, .pay-grid { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 520px) { .form-row, .pay-grid { grid-template-columns: 1fr; } .item-row { grid-template-columns: 1fr 80px; } .item-row .harga { grid-column: 1; grid-row: 2; } }
     </style>
     </head>
     <body>
@@ -308,6 +341,7 @@
                 <a href="#lokasi">Location</a>
                 <a href="#kontak">Contact</a>
                 <a href="#menu">Menu</a>
+                <a href="#pesan">Pesan</a>
             </nav>
         </header>
         <!-- HOME -->
@@ -556,6 +590,117 @@
                 </div>
             </main>
         </section>
+        <!-- FORM PEMESANAN -->
+        <section id="pesan">
+            <main>
+                <div class="title">
+                    <h1>Form Pemesanan</h1>
+                    <p>Isi data berikut untuk melakukan pemesanan</p>
+                </div>
+                <div class="panel">
+                    <form class="order-form" id="formPesan" action="#" method="post">
+
+                        <!-- DATA PEMESAN -->
+                        <fieldset>
+                            <legend>Data Pemesan</legend>
+                            <div class="field">
+                                <label for="nama">Pesanan Atas Nama</label>
+                                <input type="text" id="nama" name="nama" placeholder=" " required>
+                            </div>
+                            <div class="form-row" style="grid-template-columns: 1fr 1fr;">
+                                <div class="field">
+                                    <label for="hp">No. HP</label>
+                                    <input type="tel" id="hp" name="hp" placeholder=" " pattern="[0-9+]{9,15}" required>
+                                </div>
+                                <div class="field">
+                                    <label for="tanggal">Tanggal Booking</label>
+                                    <input type="date" id="tanggal" name="tanggal" required>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <!-- PILIHAN PAKET -->
+                        <fieldset>
+                            <legend>Pilihan Paket Menu</legend>
+                            <p style="margin-top:0;font-size:13px;color:#76665c;">Centang menu yang dipesan, lalu isi jumlah item.</p>
+                            <div class="menu-cat">Makanan</div>
+                            <div class="item-row">
+                                <label><input type="checkbox" class="item-cb" id="cb-nasi" name="menu[]" value="Nasi Goreng Seafood" data-harga="25000"> Nasi Goreng Seafood</label>
+                                <span class="harga">Rp25.000</span>
+                                <input type="number" class="item-qty" id="qty-nasi" name="jumlah-nasi" min="1" value="1" disabled aria-label="Jumlah Nasi Goreng Seafood">
+                            </div>
+                            <div class="item-row">
+                                <label><input type="checkbox" class="item-cb" id="cb-ayam" name="menu[]" value="Ayam Bakar" data-harga="30000"> Ayam Bakar</label>
+                                <span class="harga">Rp30.000</span>
+                                <input type="number" class="item-qty" id="qty-ayam" name="jumlah-ayam" min="1" value="1" disabled aria-label="Jumlah Ayam Bakar">
+                            </div>
+                            <div class="item-row">
+                                <label><input type="checkbox" class="item-cb" id="cb-sate" name="menu[]" value="Sate Ayam" data-harga="25000"> Sate Ayam</label>
+                                <span class="harga">Rp25.000</span>
+                                <input type="number" class="item-qty" id="qty-sate" name="jumlah-sate" min="1" value="1" disabled aria-label="Jumlah Sate Ayam">
+                            </div>
+                            <div class="item-row">
+                                <label><input type="checkbox" class="item-cb" id="cb-mie" name="menu[]" value="Mie Goreng" data-harga="20000"> Mie Goreng</label>
+                                <span class="harga">Rp20.000</span>
+                                <input type="number" class="item-qty" id="qty-mie" name="jumlah-mie" min="1" value="1" disabled aria-label="Jumlah Mie Goreng">
+                            </div>
+                            <div class="menu-cat">Minuman</div>
+                            <div class="item-row">
+                                <label><input type="checkbox" class="item-cb" id="cb-teh" name="menu[]" value="Es Teh Manis" data-harga="8000"> Es Teh Manis</label>
+                                <span class="harga">Rp8.000</span>
+                                <input type="number" class="item-qty" id="qty-teh" name="jumlah-teh" min="1" value="1" disabled aria-label="Jumlah Es Teh Manis">
+                            </div>
+                            <div class="item-row">
+                                <label><input type="checkbox" class="item-cb" id="cb-jeruk" name="menu[]" value="Es Jeruk" data-harga="10000"> Es Jeruk</label>
+                                <span class="harga">Rp10.000</span>
+                                <input type="number" class="item-qty" id="qty-jeruk" name="jumlah-jeruk" min="1" value="1" disabled aria-label="Jumlah Es Jeruk">
+                            </div>
+                            <div class="menu-cat">Dessert</div>
+                            <div class="item-row">
+                                <label><input type="checkbox" class="item-cb" id="cb-pisang" name="menu[]" value="Pisang Goreng Madu" data-harga="12000"> Pisang Goreng Madu</label>
+                                <span class="harga">Rp12.000</span>
+                                <input type="number" class="item-qty" id="qty-pisang" name="jumlah-pisang" min="1" value="1" disabled aria-label="Jumlah Pisang Goreng Madu">
+                            </div>
+                            <div class="item-row">
+                                <label><input type="checkbox" class="item-cb" id="cb-eskrim" name="menu[]" value="Es Krim Vanila" data-harga="15000"> Es Krim Vanila</label>
+                                <span class="harga">Rp15.000</span>
+                                <input type="number" class="item-qty" id="qty-eskrim" name="jumlah-eskrim" min="1" value="1" disabled aria-label="Jumlah Es Krim Vanila">
+                            </div>
+                            <div class="item-row">
+                                <label><input type="checkbox" class="item-cb" id="cb-puding" name="menu[]" value="Puding Coklat" data-harga="12000"> Puding Coklat</label>
+                                <span class="harga">Rp12.000</span>
+                                <input type="number" class="item-qty" id="qty-puding" name="jumlah-puding" min="1" value="1" disabled aria-label="Jumlah Puding Coklat">
+                            </div>
+                        </fieldset>
+
+                        <!-- PEMBAYARAN -->
+                        <fieldset>
+                            <legend>Metode Pembayaran</legend>
+                            <div class="pay-group-title">Kartu Debit / Kredit</div>
+                            <div class="pay-grid">
+                            <label class="pay-option"><input type="radio" name="pembayaran" value="Visa" required> <svg viewBox="0 0 72 28" role="img" aria-label="Visa"><rect width="72" height="28" rx="5" fill="#1a1f71"/><text x="36" y="21" text-anchor="middle" font-family="Arial" font-weight="bold" font-style="italic" font-size="19" fill="#fff">VISA</text></svg><span class="sr">Visa</span></label>
+                            <label class="pay-option"><input type="radio" name="pembayaran" value="Mastercard" required> <svg viewBox="0 0 72 28" role="img" aria-label="Mastercard"><rect width="72" height="28" rx="5" fill="#fff" stroke="#ddd"/><circle cx="30" cy="14" r="9" fill="#eb001b"/><circle cx="42" cy="14" r="9" fill="#f79e1b" fill-opacity=".9"/></svg><span class="sr">Mastercard</span></label>
+                            </div>
+                            <div id="kartuBox" class="field">
+                                <label for="nokartu">Nomor Kartu</label>
+                                <input type="text" id="nokartu" name="nokartu" inputmode="numeric" maxlength="19" placeholder="1234 5678 9012 3456">
+                            </div>
+                            <div class="pay-group-title" style="margin-top:18px;">Dompet Digital</div>
+                            <div class="pay-grid">
+                            <label class="pay-option"><input type="radio" name="pembayaran" value="GoPay" required> <svg viewBox="0 0 72 28" role="img" aria-label="GoPay"><rect width="72" height="28" rx="14" fill="#00aed6"/><text x="36" y="19" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="13" fill="#fff">GoPay</text></svg><span class="sr">GoPay</span></label>
+                            <label class="pay-option"><input type="radio" name="pembayaran" value="OVO" required> <svg viewBox="0 0 72 28" role="img" aria-label="OVO"><rect width="72" height="28" rx="14" fill="#4c2a86"/><text x="36" y="19" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="13" fill="#fff">OVO</text></svg><span class="sr">OVO</span></label>
+                            <label class="pay-option"><input type="radio" name="pembayaran" value="DANA" required> <svg viewBox="0 0 72 28" role="img" aria-label="DANA"><rect width="72" height="28" rx="14" fill="#118eea"/><text x="36" y="19" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="13" fill="#fff">DANA</text></svg><span class="sr">DANA</span></label>
+                            <label class="pay-option"><input type="radio" name="pembayaran" value="ShopeePay" required> <svg viewBox="0 0 72 28" role="img" aria-label="ShopeePay"><rect width="72" height="28" rx="14" fill="#ee4d2d"/><text x="36" y="19" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="13" fill="#fff">ShopeePay</text></svg><span class="sr">ShopeePay</span></label>
+                            </div>
+                        </fieldset>
+
+                        <div class="total-box"><span>Total Pembayaran</span><span id="total">Rp0</span></div>
+                        <button type="submit">Kirim Pesanan</button>
+                    </form>
+                    <div id="hasilPesanan" role="status"></div>
+                </div>
+            </main>
+        </section>
         <!-- FOOTER -->
         <footer>
             <strong>Restoran Lengkara Merapi</strong>
@@ -566,5 +711,68 @@
                 © 2026 Restoran Lengkara Merapi
             </p>
         </footer>
+    <script>
+        (function () {
+            var rp = function (n) { return "Rp" + n.toLocaleString("id-ID"); };
+            var tgl = document.getElementById("tanggal");
+            tgl.min = new Date().toISOString().split("T")[0];
+
+            var cbs = document.querySelectorAll(".item-cb");
+            function hitung() {
+                var total = 0;
+                cbs.forEach(function (cb) {
+                    var qty = cb.closest(".item-row").querySelector(".item-qty");
+                    qty.disabled = !cb.checked;
+                    if (cb.checked) total += (parseInt(qty.value) || 0) * parseInt(cb.dataset.harga);
+                });
+                document.getElementById("total").textContent = rp(total);
+                return total;
+            }
+            document.querySelectorAll(".item-cb, .item-qty").forEach(function (el) {
+                el.addEventListener("input", hitung);
+                el.addEventListener("change", hitung);
+            });
+
+            var kartuBox = document.getElementById("kartuBox");
+            var noKartu = document.getElementById("nokartu");
+            document.querySelectorAll('input[name="pembayaran"]').forEach(function (r) {
+                r.addEventListener("change", function () {
+                    var kartu = (r.value === "Visa" || r.value === "Mastercard") && r.checked;
+                    kartuBox.style.display = kartu ? "flex" : "none";
+                    noKartu.required = kartu;
+                    if (!kartu) noKartu.value = "";
+                });
+            });
+            noKartu.addEventListener("input", function () {
+                var d = noKartu.value.replace(/\D/g, "").slice(0, 16);
+                noKartu.value = d.replace(/(.{4})/g, "$1 ").trim();
+            });
+
+            document.getElementById("formPesan").addEventListener("submit", function (e) {
+                e.preventDefault();
+                var dipilih = [];
+                cbs.forEach(function (cb) {
+                    if (cb.checked) {
+                        var q = cb.closest(".item-row").querySelector(".item-qty").value;
+                        dipilih.push(cb.value + " x" + q);
+                    }
+                });
+                if (!dipilih.length) { alert("Pilih minimal satu menu terlebih dahulu."); return; }
+                var bayar = document.querySelector('input[name="pembayaran"]:checked').value;
+                var hasil = document.getElementById("hasilPesanan");
+                hasil.innerHTML = "<h3>Pesanan Berhasil Dikirim</h3>" +
+                    "<p>Nama: <b></b><br>No. HP: <b></b><br>Tanggal Booking: <b></b><br>Pesanan: <b></b><br>Pembayaran: <b></b><br>Total: <b></b></p>";
+                var b = hasil.querySelectorAll("b");
+                b[0].textContent = document.getElementById("nama").value;
+                b[1].textContent = document.getElementById("hp").value;
+                b[2].textContent = tgl.value;
+                b[3].textContent = dipilih.join(", ");
+                b[4].textContent = bayar;
+                b[5].textContent = rp(hitung());
+                hasil.style.display = "block";
+                hasil.scrollIntoView({ behavior: "smooth", block: "center" });
+            });
+        })();
+    </script>
     </body>
 </html>
